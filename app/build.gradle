@@ -22,6 +22,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    copy {
+        from "../.github/hooks"
+        into "../.git/hooks"
+        fileMode 0777
+    }
 }
 
 dependencies {
