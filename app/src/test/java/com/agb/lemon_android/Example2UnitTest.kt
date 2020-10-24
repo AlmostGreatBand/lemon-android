@@ -6,6 +6,6 @@ import org.junit.Test
 class Example2UnitTest {
     @Test
     fun testIsTrueTrue() {
-        Assert.assertTrue("False!", false)
+        Assert.assertTrue("False!", true)
     }
 }
