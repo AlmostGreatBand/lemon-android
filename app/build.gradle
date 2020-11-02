@@ -3,9 +3,13 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
+def getProp(name) {
+    return System.getenv(name) ?: rootProject.localprops[name] ?: project[name]
+}
+
 android {
     compileSdkVersion 30
-    buildToolsVersion "30.0.1"
+    buildToolsVersion "30.0.2"
 
     defaultConfig {
         applicationId "com.agb.lemon_android"
@@ -13,6 +17,8 @@ android {
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
+
+        buildConfigField "String", "API_BASE_URL", '"' + getProp('API_BASE_URL') + '"'
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

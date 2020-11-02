@@ -1,5 +1,6 @@
 package com.agb.lemon_android.frameworks.datasource.remote.api
 
+import com.agb.lemon_android.BuildConfig
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -11,7 +12,7 @@ class LemonClient {
         }.build()
 
         val retrofit = Retrofit.Builder()
-            .baseUrl("localhost:8080")
+            .baseUrl(BuildConfig.API_BASE_URL)
             .client(client)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
@@ -21,7 +22,7 @@ class LemonClient {
 
     fun getAuthService(): LemonAuthApi {
         val retrofit = Retrofit.Builder()
-            .baseUrl("localhost:8080")
+            .baseUrl(BuildConfig.API_BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
