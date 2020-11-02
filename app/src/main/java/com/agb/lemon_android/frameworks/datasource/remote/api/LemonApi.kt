@@ -9,11 +9,8 @@ import retrofit2.http.Header
 import retrofit2.http.POST
 
 interface LemonApi {
-    @POST("registration")
-    suspend fun registration(@Body user: User)
-
     @POST("profile")
-    suspend fun updateProfile(@Body user: User)
+    suspend fun updateProfile(@Header("Authorization") credentials: String, @Body user: User)
 
     @GET("profile")
     suspend fun getProfile(@Header("Authorization") credentials: String): User
