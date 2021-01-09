@@ -1,4 +1,13 @@
 <resources>
-    <string name="app_name">lemon-android</string>
+    <string name="app_name">Lemon</string>
     <string name="my_cards">My Cards</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="sign_in"><![CDATA[< Sign in]]></string>
+    <string name="send">Send</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="username">Username</string>
+    <string name="sign_up"><![CDATA[Sign up >]]></string>
+    <string name="forgot_your_password">Forgot your password?</string>
 </resources>

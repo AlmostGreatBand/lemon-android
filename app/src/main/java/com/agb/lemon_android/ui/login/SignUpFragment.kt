@@ -8,30 +8,29 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.agb.lemon_android.R
 import com.agb.lemon_android.ui.MainActivity
-import kotlinx.android.synthetic.main.login_fragment.*
+import kotlinx.android.synthetic.main.sign_up_fragment.*
 
-class LoginFragment : Fragment() {
+class SignUpFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.login_fragment, container, false)
+        return inflater.inflate(R.layout.sign_up_fragment, container, false)
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        login_button.setOnClickListener {
-            val login = login_login.text.toString()
-            val password = login_password.text.toString()
-            createToast("$login $password")
+        send_button.setOnClickListener {
+            val username = registration_username.text.toString()
+            val login = registration_login.text.toString()
+            val password = registration_password.text.toString()
+            createToast("$username $login $password")
         }
 
-        login_to_registration.setOnClickListener{
-            (requireActivity() as MainActivity).changeFragment(SignUpFragment())
+        registration_to_login.setOnClickListener{
+            (requireActivity() as MainActivity).changeFragment(LoginFragment())
         }
     }
-
     private fun createToast(msg: String) = Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
 }
