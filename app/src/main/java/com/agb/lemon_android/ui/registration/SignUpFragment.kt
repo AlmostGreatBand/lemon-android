@@ -1,4 +1,4 @@
-package com.agb.lemon_android.ui.login
+package com.agb.lemon_android.ui.registration
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.agb.lemon_android.R
 import com.agb.lemon_android.ui.MainActivity
+import com.agb.lemon_android.ui.login.LoginFragment
 import kotlinx.android.synthetic.main.sign_up_fragment.*
 
 class SignUpFragment : Fragment() {
