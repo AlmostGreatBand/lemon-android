@@ -40,6 +40,11 @@ android {
         into "../.git/hooks"
         fileMode 0777
     }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+
 }
 
 dependencies {

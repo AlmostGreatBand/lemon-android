@@ -7,11 +7,12 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.agb.lemon_android.R
+import com.agb.lemon_android.ui.LemonFragment
 import com.agb.lemon_android.ui.MainActivity
 import com.agb.lemon_android.ui.login.LoginFragment
 import kotlinx.android.synthetic.main.sign_up_fragment.*
 
-class SignUpFragment : Fragment() {
+class SignUpFragment : LemonFragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -30,8 +31,7 @@ class SignUpFragment : Fragment() {
         }
 
         registration_to_login.setOnClickListener{
-            (requireActivity() as MainActivity).changeFragment(LoginFragment())
+            changeFragment(LoginFragment())
         }
     }
-    private fun createToast(msg: String) = Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
 }
