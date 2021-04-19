@@ -37,3 +37,7 @@ Newest version: 0.0.0
     - by cards;
     - by type;
     - by time.
+
+## 1.0.0
+
+- Stable version with all above
