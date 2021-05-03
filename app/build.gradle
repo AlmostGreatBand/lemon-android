@@ -1,6 +1,5 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 def getProp(name) {
@@ -74,6 +73,8 @@ dependencies {
     implementation "androidx.room:room-ktx:$room_version"
 
     implementation "com.google.android.material:material:$material_version"
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit_converter_version"
     implementation "com.squareup.okhttp3:logging-interceptor:$logging_interceptor_version"
 
     implementation project(path: ':core')
