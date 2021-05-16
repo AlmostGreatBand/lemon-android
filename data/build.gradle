@@ -14,7 +14,7 @@ android {
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        minSdkVersion 21
+        minSdkVersion 23
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -52,6 +52,7 @@ dependencies {
     kapt "androidx.room:room-compiler:$room_version"
 
     implementation "androidx.preference:preference-ktx:$preference_version"
+    implementation "androidx.security:security-crypto:$androidx_crypro_version"
 
     debugImplementation "com.github.chuckerteam.chucker:library:$chucker_version"
     releaseImplementation "com.github.chuckerteam.chucker:library-no-op:$chucker_version"

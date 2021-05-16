@@ -18,6 +18,8 @@ buildscript {
         androidx_legacy_version = "1.0.0"
         androidx_lifecycle_version = "2.3.1"
         androidx_recycler_version = "1.2.0"
+        androidx_crypro_version = "1.0.0"
+        androidx_crypto_identity_version = "1.0.0-alpha02"
 
         preference_version = "1.1.1"
         retrofit_version = "2.9.0"
@@ -45,7 +47,6 @@ buildscript {
     }
     repositories {
         google()
-        jcenter()
         maven {
             url "https://plugins.gradle.org/m2/"
         }

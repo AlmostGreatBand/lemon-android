@@ -5,9 +5,11 @@ import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 
 abstract class LemonFragment : Fragment() {
-    val lemonActivity: LemonActivity get() = activity as LemonActivity
-    val lemonApp: LemonApp get() = lemonActivity.app
-    val appModule: AppModule get() = lemonApp.appModule
+    protected val lemonActivity: LemonActivity get() = activity as LemonActivity
+    protected val lemonApp: LemonApp get() = lemonActivity.app
+    protected val appModule: AppModule get() = lemonApp.appModule
+
+    protected val router get() = lemonActivity.router
 
     protected fun shortToast(text: String) {
         Toast.makeText(requireContext(), text, Toast.LENGTH_SHORT).show()
