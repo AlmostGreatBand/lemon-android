@@ -8,6 +8,7 @@ import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.ViewModelProvider
 import com.agb.core.common.Result
+import com.agb.core.common.Stage
 import com.agb.core_ui.LemonFragment
 import com.agb.feature_login.R
 import com.agb.feature_login.databinding.FragmentLoginBinding
@@ -50,7 +51,7 @@ class LoginFragment : LemonFragment() {
                 is Result.Error -> shortToast(
                     getString(R.string.login_error, it.exception)
                 )
-                is Result.Success -> shortToast("You're in!")
+                is Result.Success -> router routeTo Stage.Home
             }
         }
 

@@ -4,6 +4,7 @@ import android.content.Context
 import com.agb.core.di.Local
 import com.agb.core.di.Remote
 import com.agb.core_ui.AppModule
+import com.agb.data.local.SecuredPreferencesManager
 import com.agb.data.remote.getAuthService
 import com.agb.feature_login.core.datasource.AuthDataSource
 import com.agb.feature_login.core.datasource.UserDataSource
@@ -54,4 +55,7 @@ abstract class LoginModule {
 class AuthModule(private val context: Context) {
     @Provides
     fun loginApi(): UserApi = getAuthService(context)
+
+    @Provides
+    fun securedPrefs(): SecuredPreferencesManager = SecuredPreferencesManager(context)
 }
