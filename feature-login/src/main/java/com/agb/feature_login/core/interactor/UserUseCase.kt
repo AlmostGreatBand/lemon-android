@@ -1,6 +1,7 @@
 package com.agb.feature_login.core.interactor
 
 import com.agb.core.common.Operation
+import com.agb.core.common.Result
 import com.agb.core.domain.model.User
 import com.agb.feature_login.core.repository.UserRepository
 import javax.inject.Inject
@@ -13,7 +14,7 @@ sealed class UserUseCase constructor(protected val repository: UserRepository) {
     }
 
     class GetUser @Inject constructor(repository: UserRepository) : UserUseCase(repository) {
-        operator fun invoke(): User? = repository.currentUser
+        suspend operator fun invoke(): Result<User> = repository.getUserInfo()
     }
 
     class SaveUser @Inject constructor(repository: UserRepository) : UserUseCase(repository) {
@@ -21,6 +22,6 @@ sealed class UserUseCase constructor(protected val repository: UserRepository) {
     }
 
     class Logout @Inject constructor(repository: UserRepository) : UserUseCase(repository) {
-        operator fun invoke() = repository.clear()
+        operator fun invoke(): Operation = TODO("Not yet implemented")
     }
 }

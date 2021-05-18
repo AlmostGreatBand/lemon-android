@@ -7,4 +7,9 @@
     <string name="login_password_edx">Password</string>
     <string name="login_login_btn">Login</string>
     <string name="login_error">Unable to login due error: %s</string>
+
+    <!-- Home -->
+    <string name="home_title">Welcome to Lemon🍋, %s!</string>
+    <string name="home_default_name">User</string>
+    <string name="home_error">Failed to load user info: %s</string>
 </resources>

@@ -3,7 +3,6 @@ package com.agb.feature_login.di
 import android.content.Context
 import com.agb.core.di.Local
 import com.agb.core.di.Remote
-import com.agb.core_ui.AppModule
 import com.agb.data.local.SecuredPreferencesManager
 import com.agb.data.remote.getAuthService
 import com.agb.feature_login.core.datasource.AuthDataSource
@@ -25,7 +24,6 @@ import javax.inject.Singleton
     modules = [
         LoginModule::class,
         AuthModule::class,
-        AppModule::class
     ]
 )
 @Singleton

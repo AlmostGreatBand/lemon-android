@@ -27,7 +27,6 @@ class LoginFragment : LemonFragment() {
         viewModel = ViewModelProvider(this)[LoginViewModel::class.java]
         DaggerLoginComponent.builder()
             .authModule(AuthModule(lemonApp))
-            .appModule(appModule)
             .build()
             .inject(viewModel)
     }
@@ -51,7 +50,7 @@ class LoginFragment : LemonFragment() {
                 is Result.Error -> shortToast(
                     getString(R.string.login_error, it.exception)
                 )
-                is Result.Success -> router routeTo Stage.Home
+                is Result.Success -> router.routeTo(Stage.Home, true)
             }
         }
 

@@ -15,11 +15,10 @@ class UserRepositoryImpl @Inject constructor(
     @Remote private val remote: UserDataSource,
     private val authenticator: AuthDataSource,
 ) : UserRepository {
-    private var user: User? = null
-    override val currentUser: User? get() = user
+    override suspend fun getUserInfo(): Result<User> = local.getUserInfo()
 
     override suspend fun saveUserInfo(user: User): Operation {
-        if (this.user == null) {
+        if (getUserInfo() is Result.Error) {
             return Result.Error(LogicError.UserNotExists)
         }
 
@@ -30,12 +29,7 @@ class UserRepositoryImpl @Inject constructor(
         return authenticator.loginUser(login, password).map { cache(it) }
     }
 
-    override fun clear() {
-        user = null
-    }
-
     private suspend fun cache(user: User) {
-        this.user = user
         local.saveUserInfo(user)
     }
 }
