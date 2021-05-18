@@ -1,4 +1,7 @@
 # Lemon changelog
 
-## Unversioned:
-- Put changes here;
+## 0.0.2:
+- Feature: Login;
+- User use cases;
+- basic DI;
+- basic app architecture.

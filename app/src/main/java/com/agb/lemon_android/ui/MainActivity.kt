@@ -6,16 +6,17 @@ import com.agb.core.common.Router
 import com.agb.core.common.Stage
 import com.agb.core_ui.Animation
 import com.agb.core_ui.LemonActivity
+import com.agb.feature_home.ui.HomeFragment
 import com.agb.feature_login.ui.LoginFragment
 
 class MainActivity : LemonActivity() {
     override val router = object : Router {
         private val Stage.fragment get() = when (this) {
-            Stage.Home -> LoginFragment()
+            Stage.Home -> HomeFragment()
             Stage.Login -> LoginFragment()
         }
 
-        override fun routeTo(stage: Stage) {
+        override fun routeTo(stage: Stage, clearBackStack: Boolean) {
             viewModel.setStage(stage)
 
             val animation = if (viewModel.previousStages.isEmpty()) {
@@ -23,6 +24,8 @@ class MainActivity : LemonActivity() {
             } else {
                 Animation.Forward
             }
+
+            if (clearBackStack) clearBackStack()
 
             changeFragment(stage.fragment, animation)
         }
@@ -41,16 +44,30 @@ class MainActivity : LemonActivity() {
         override fun restore(stage: Stage) {
             changeFragment(stage.fragment, Animation.Start)
         }
+
+        override fun back() {
+            if (viewModel.previousStages.isEmpty()) {
+                finish()
+                return
+            }
+
+            val stage = viewModel.previousStages.removeLast()
+            changeFragment(stage.fragment, Animation.Return)
+        }
+
+        override fun clearBackStack() {
+            viewModel.previousStages.clear()
+        }
     }
 
     val viewModel by lazy { ViewModelProvider(this)[MainViewModel::class.java] }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        router routeTo viewModel.stage
+        router.routeTo(viewModel.stage)
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
-        router restore viewModel.stage
+        router.restore(viewModel.stage)
     }
 }

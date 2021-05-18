@@ -23,4 +23,8 @@ abstract class LemonActivity : AppCompatActivity() {
             replace(R.id.container, fragment)
         }.commit()
     }
+
+    override fun onBackPressed() {
+        router.back()
+    }
 }

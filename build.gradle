@@ -43,7 +43,7 @@ buildscript {
         // semantic versioning
         versionMajorApp = 0
         versionMinorApp = 0
-        versionPatch = 1
+        versionPatch = 2
     }
     repositories {
         google()

@@ -6,7 +6,9 @@ sealed class Stage {
 }
 
 interface Router {
-    infix fun routeTo(stage: Stage)
-    infix fun backTo(stage: Stage)
-    infix fun restore(stage: Stage)
+    fun routeTo(stage: Stage, clearBackStack: Boolean = false)
+    fun backTo(stage: Stage)
+    fun restore(stage: Stage)
+    fun back()
+    fun clearBackStack()
 }
