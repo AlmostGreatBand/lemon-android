@@ -1,3 +1,7 @@
 include ':core'
 include ':app'
 rootProject.name = "lemon-android"
+include ':feature-login'
+include ':data'
+include ':core-ui'
+include ':feature-home'
