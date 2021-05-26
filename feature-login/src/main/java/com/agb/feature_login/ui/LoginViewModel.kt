@@ -1,41 +1,43 @@
 package com.agb.feature_login.ui
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.agb.core.common.Operation
 import com.agb.core.common.Result
 import com.agb.core.common.exceptions.LogicError
-import com.agb.feature_login.core.interactor.UserUseCase
-import javax.inject.Inject
+import com.agb.core.domain.interactor.UserInteractor
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-class LoginViewModel : ViewModel() {
-    private val _buttonEnabled = MutableLiveData(false)
-    val buttonEnabled: LiveData<Boolean> get() = _buttonEnabled
+class LoginViewModel(
+    private val userInteractor: UserInteractor
+) : ViewModel() {
+    private val _buttonEnabled = MutableStateFlow(false)
+    val buttonEnabled: StateFlow<Boolean> get() = _buttonEnabled
 
-    val login = MutableLiveData<String>()
-    val password = MutableLiveData<String>()
+    val login = MutableStateFlow("")
+    val password = MutableStateFlow("")
 
-    private val _loginStatus = MutableLiveData<Operation>()
-    val loginStatus: LiveData<Operation> get() = _loginStatus
-
-    @Inject
-    lateinit var useCase: UserUseCase.Login
+    private val _loginStatus = MutableStateFlow<Operation?>(null)
+    val loginStatus: StateFlow<Operation?> get() = _loginStatus
 
     init {
         val checkValidity = {
             _buttonEnabled.value = credentialsValid
         }
-        login.observeForever { checkValidity() }
-        password.observeForever { checkValidity() }
+
+        viewModelScope.launch {
+            login.collect { checkValidity() }
+            password.collect { checkValidity() }
+        }
     }
 
     private val credentialsValid: Boolean
         get() = when {
-            login.value.isNullOrBlank() -> false
-            password.value.isNullOrBlank() -> false
+            login.value.isBlank() -> false
+            password.value.isBlank() -> false
             else -> true
         }
 
@@ -48,8 +50,8 @@ class LoginViewModel : ViewModel() {
         _buttonEnabled.value = false
         _loginStatus.value = Result.Pending
         viewModelScope.launch {
-            val res = useCase(login.value ?: "", password.value ?: "")
-            _loginStatus.postValue(res)
+            val res = userInteractor.login(login.value, password.value)
+            _loginStatus.emit(res)
         }
     }
 }

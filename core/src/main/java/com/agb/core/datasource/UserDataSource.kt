@@ -1,4 +1,4 @@
-package com.agb.feature_login.core.datasource
+package com.agb.core.datasource
 
 import com.agb.core.common.Result
 import com.agb.core.domain.model.User
