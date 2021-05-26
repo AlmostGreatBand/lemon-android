@@ -1,11 +1,11 @@
-package com.agb.feature_login.data.remote
+package com.agb.data.remote
 
 import com.agb.core.common.Result
+import com.agb.core.datasource.UserDataSource
 import com.agb.core.domain.model.User
-import com.agb.feature_login.core.datasource.UserDataSource
-import javax.inject.Inject
+import com.agb.data.remote.api.UserApi
 
-class UserRemoteDataSource @Inject constructor() : UserDataSource {
+class UserRemoteDataSource(private val userApi: UserApi) : UserDataSource {
     override suspend fun getUserInfo(): Result<User> {
         return Result.Success(User("", "", ""))
     }

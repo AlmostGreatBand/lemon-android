@@ -1,4 +1,4 @@
-package com.agb.feature_login.core.repository
+package com.agb.core.domain.repository
 
 import com.agb.core.common.Operation
 import com.agb.core.common.Result

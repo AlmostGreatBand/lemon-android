@@ -1,13 +1,13 @@
 package com.agb.lemon_android.ui
 
 import android.os.Bundle
-import androidx.lifecycle.ViewModelProvider
 import com.agb.core.common.Router
 import com.agb.core.common.Stage
 import com.agb.core_ui.Animation
 import com.agb.core_ui.LemonActivity
 import com.agb.feature_home.ui.HomeFragment
 import com.agb.feature_login.ui.LoginFragment
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : LemonActivity() {
     override val router = object : Router {
@@ -60,10 +60,11 @@ class MainActivity : LemonActivity() {
         }
     }
 
-    val viewModel by lazy { ViewModelProvider(this)[MainViewModel::class.java] }
+    val viewModel: MainViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         router.routeTo(viewModel.stage)
     }
 

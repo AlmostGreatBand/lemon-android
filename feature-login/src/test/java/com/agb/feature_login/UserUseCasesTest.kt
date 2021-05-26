@@ -4,7 +4,7 @@
 // import com.agb.core.common.exceptions.LogicError
 // import com.agb.core.domain.model.User
 // import com.agb.feature_login.core.interactor.UserUseCase
-// import com.agb.feature_login.core.repository.UserRepository
+// import com.agb.core.domain.repository.UserRepository
 // import kotlinx.coroutines.runBlocking
 // import org.junit.Assert
 // import org.junit.Before

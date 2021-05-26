@@ -1,17 +1,15 @@
-package com.agb.feature_login.data.local
+package com.agb.data.local
 
 import com.agb.core.common.Result
 import com.agb.core.common.exceptions.LogicError
 import com.agb.core.common.exceptions.UnexpectedLemonException
+import com.agb.core.datasource.UserDataSource
 import com.agb.core.domain.model.User
-import com.agb.data.local.SecuredPreferencesManager
-import com.agb.feature_login.core.datasource.UserDataSource
 import java.lang.Exception
 import java.nio.charset.Charset
-import javax.inject.Inject
 import okio.ByteString
 
-class UserLocalDataSource @Inject constructor(
+class UserLocalDataSource(
     private val preferencesManager: SecuredPreferencesManager
 ) : UserDataSource {
     private val PREF_CREDS = "PREF_CREDS"

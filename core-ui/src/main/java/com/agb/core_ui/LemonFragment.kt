@@ -6,8 +6,6 @@ import androidx.fragment.app.Fragment
 
 abstract class LemonFragment : Fragment() {
     protected val lemonActivity: LemonActivity get() = activity as LemonActivity
-    protected val lemonApp: LemonApp get() = lemonActivity.app
-    protected val appModule: AppModule get() = lemonApp.appModule
 
     protected val router get() = lemonActivity.router
 

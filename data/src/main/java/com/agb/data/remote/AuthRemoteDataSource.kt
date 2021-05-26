@@ -1,19 +1,18 @@
-package com.agb.feature_login.data.remote
+package com.agb.data.remote
 
 import com.agb.core.common.Result
 import com.agb.core.common.exceptions.HttpLemonException
 import com.agb.core.common.exceptions.LogicError
 import com.agb.core.common.exceptions.LogicException
 import com.agb.core.common.exceptions.UnexpectedLemonException
+import com.agb.core.datasource.AuthDataSource
 import com.agb.core.domain.model.User
-import com.agb.feature_login.core.datasource.AuthDataSource
-import com.agb.feature_login.data.remote.api.UserApi
-import javax.inject.Inject
+import com.agb.data.remote.api.AuthApi
 import okhttp3.Credentials
 import retrofit2.HttpException
 
-class AuthRemoteDataSource @Inject constructor(
-    private val api: UserApi
+class AuthRemoteDataSource(
+    private val api: AuthApi
 ) : AuthDataSource {
     override suspend fun loginUser(login: String, password: String): Result<User> {
         return try {

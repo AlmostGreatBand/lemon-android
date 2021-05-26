@@ -1,6 +1,5 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-kapt'
 
 def genVersionCode() {
     return project.versionMajorApp * 100000 + project.versionMinorApp * 1000 + project.versionPatch.toInteger()
@@ -22,6 +21,10 @@ android {
         versionName genVersionName()
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
     }
 
     buildTypes {
@@ -53,9 +56,8 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
-    implementation "com.google.dagger:dagger:$dagger_version"
+    implementation project(path: ':feature-login')
     implementation project(path: ':feature-home')
-    kapt "com.google.dagger:dagger-compiler:$dagger_version"
 
     implementation "androidx.core:core-ktx:$androidx_core_version"
     implementation "androidx.appcompat:appcompat:$androidx_app_compat_version"
@@ -67,9 +69,12 @@ dependencies {
 
     implementation "com.google.android.material:material:$material_version"
 
+    implementation "io.insert-koin:koin-core:$koin_version"
+    implementation "io.insert-koin:koin-android:$koin_version"
+
+    implementation project(path: ':data')
     implementation project(path: ':core')
     implementation project(path: ':core-ui')
-    implementation project(path: ':feature-login')
 
     testImplementation "junit:junit:$junit_version"
     testImplementation "org.mockito:mockito-core:$mockito_version"

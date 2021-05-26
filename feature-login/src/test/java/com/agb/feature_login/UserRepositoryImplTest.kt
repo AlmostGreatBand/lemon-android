@@ -2,9 +2,9 @@
 //
 // import com.agb.core.common.Result
 // import com.agb.core.domain.model.User
-// import com.agb.feature_login.core.datasource.AuthDataSource
-// import com.agb.feature_login.core.datasource.UserDataSource
-// import com.agb.feature_login.core.repository.UserRepositoryImpl
+// import com.agb.core.datasource.AuthDataSource
+// import com.agb.core.datasource.UserDataSource
+// import com.agb.core.domain.repository.UserRepositoryImpl
 // import kotlinx.coroutines.runBlocking
 // import org.junit.Assert
 // import org.junit.Before
