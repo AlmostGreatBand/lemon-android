@@ -19,7 +19,13 @@ class UserLocalDataSource(
         val creds = preferencesManager[PREF_CREDS] ?: return Result.Error(LogicError.UserNotExists)
         val username = preferencesManager[PREF_USERNAME] ?: ""
 
-        val (login, pass) = ByteString.decodeBase64(creds).toString().split(':')
+        val splitted = ByteString.decodeBase64(creds)?.utf8()?.split(':')
+
+        if (splitted.isNullOrEmpty()) {
+            return Result.Error(LogicError.UserNotExists)
+        }
+
+        val (login, pass) = splitted
 
         if (login.isBlank() || pass.isBlank()) {
             preferencesManager.clear()

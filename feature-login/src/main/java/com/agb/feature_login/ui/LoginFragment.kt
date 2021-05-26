@@ -13,6 +13,7 @@ import com.agb.core_ui.LemonFragment
 import com.agb.feature_login.R
 import com.agb.feature_login.databinding.FragmentLoginBinding
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LoginFragment : LemonFragment() {
@@ -34,16 +35,20 @@ class LoginFragment : LemonFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         lifecycleScope.launchWhenStarted {
-            viewModel.buttonEnabled.collect(binding.loginBtn::setEnabled)
-            viewModel.loginStatus.collect {
-                binding.progress.isVisible = false
-                when (it) {
-                    Result.Pending -> binding.progress.isVisible = true
-                    is Result.Error -> shortToast(
-                        getString(R.string.login_error, it.exception)
-                    )
-                    is Result.Success -> router.routeTo(Stage.Home, true)
-                    null -> Unit
+            launch {
+                viewModel.buttonEnabled.collect(binding.loginBtn::setEnabled)
+            }
+            launch {
+                viewModel.loginStatus.collect {
+                    binding.progress.isVisible = false
+                    when (it) {
+                        Result.Pending -> binding.progress.isVisible = true
+                        is Result.Error -> shortToast(
+                            getString(R.string.login_error, it.exception)
+                        )
+                        is Result.Success -> router.routeTo(Stage.Home, true)
+                        null -> Unit
+                    }
                 }
             }
         }

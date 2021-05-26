@@ -1,12 +1,15 @@
 package com.agb.lemon_android.ui
 
 import android.os.Bundle
+import androidx.lifecycle.lifecycleScope
 import com.agb.core.common.Router
 import com.agb.core.common.Stage
 import com.agb.core_ui.Animation
 import com.agb.core_ui.LemonActivity
 import com.agb.feature_home.ui.HomeFragment
 import com.agb.feature_login.ui.LoginFragment
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : LemonActivity() {
@@ -65,7 +68,29 @@ class MainActivity : LemonActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        router.routeTo(viewModel.stage)
+        lifecycleScope.launchWhenCreated {
+            launch {
+                viewModel.user.collect {
+                    if (it != null) {
+                        router.routeTo(Stage.Home)
+                    } else {
+                        router.routeTo(Stage.Login)
+                    }
+                }
+            }
+
+            launch {
+                viewModel.authError.collect {
+                    if (it != null) {
+                        if (viewModel.stage != Stage.Login) {
+                            router.routeTo(Stage.Login)
+                        }
+                    }
+                }
+            }
+        }
+
+        viewModel.loadUserData()
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {

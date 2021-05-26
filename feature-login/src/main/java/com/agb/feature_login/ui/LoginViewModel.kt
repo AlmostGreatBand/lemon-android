@@ -28,10 +28,8 @@ class LoginViewModel(
             _buttonEnabled.value = credentialsValid
         }
 
-        viewModelScope.launch {
-            login.collect { checkValidity() }
-            password.collect { checkValidity() }
-        }
+        viewModelScope.launch { login.collect { checkValidity() } }
+        viewModelScope.launch { password.collect { checkValidity() } }
     }
 
     private val credentialsValid: Boolean
