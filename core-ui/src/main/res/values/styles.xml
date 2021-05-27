@@ -5,8 +5,20 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-
-        <item name="backgroundColor">@color/gray</item>
+        <item name="android:statusBarColor">@color/colorAccent</item>
     </style>
 
+    <style name="Field">
+        <item name="android:textColor">@color/textPrimary</item>
+        <item name="android:fontFamily">@font/roboto</item>
+        <item name="android:textColorHint">@color/textSecondary</item>
+    </style>
+
+    <style name="Field.Text">
+        <item name="android:inputType">textAutoComplete</item>
+    </style>
+
+    <style name="Field.Password">
+        <item name="android:inputType">textPassword</item>
+    </style>
 </resources>

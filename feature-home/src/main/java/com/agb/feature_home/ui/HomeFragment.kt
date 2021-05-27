@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import com.agb.core.common.Result
+import com.agb.core.common.Stage
 import com.agb.core_ui.LemonFragment
 import com.agb.feature_home.R
 import com.agb.feature_home.databinding.FragmentHomeBinding
@@ -41,6 +42,10 @@ class HomeFragment : LemonFragment() {
                     }
                 }
             }
+        }
+
+        binding.profileButton.setOnClickListener {
+            router.routeTo(Stage.Profile)
         }
 
         viewModel.getName()
