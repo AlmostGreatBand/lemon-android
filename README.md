@@ -3,9 +3,10 @@
 
 Android client for Lemon App.
 
-| ----- |
-| [Changelog](CHANGELOG.md) |
-| [Release plan](RELEASES.md) | 
+| VERSIONS                        |
+| ------------------------------- |
+| __[Changelog](CHANGELOG.md)__   |
+| __[Release plan](RELEASES.md)__ | 
 
 # Team:
 - [Zhenya Zasko](https://github.com/NeProgramist)
