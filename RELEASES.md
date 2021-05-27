@@ -2,7 +2,7 @@
 
 This document describes main features that must be implemented in each version
 
-Newest version: 0.0.0
+Newest version: 0.0.3
 
 ## 0.1.0
 
