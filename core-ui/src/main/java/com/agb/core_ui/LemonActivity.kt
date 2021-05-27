@@ -5,8 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.agb.core.common.Router
 
 abstract class LemonActivity : AppCompatActivity() {
-    val app: LemonApp get() = application as LemonApp
-
     abstract val router: Router
 
     override fun onCreate(savedInstanceState: Bundle?) {

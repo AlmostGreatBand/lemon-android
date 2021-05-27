@@ -2,9 +2,25 @@
     <!-- Base application theme. -->
     <style name="LemonTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/loafer</item>
+        <item name="colorPrimaryDark">@color/feijoa</item>
+        <item name="colorAccent">@color/green_kelp</item>
+        <item name="android:statusBarColor">@color/green_kelp</item>
+        <item name="textPrimary">@color/green_kelp2</item>
+        <item name="textSecondary">@color/goblin</item>
     </style>
 
+    <style name="Field">
+        <item name="android:textColor">?attr/textPrimary</item>
+        <item name="android:fontFamily">@font/roboto</item>
+        <item name="android:textColorHint">?attr/textSecondary</item>
+    </style>
+
+    <style name="Field.Text">
+        <item name="android:inputType">textAutoComplete</item>
+    </style>
+
+    <style name="Field.Password">
+        <item name="android:inputType">textPassword</item>
+    </style>
 </resources>

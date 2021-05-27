@@ -1,19 +1,24 @@
 package com.agb.lemon_android.ui
 
 import android.os.Bundle
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.agb.core.common.Router
 import com.agb.core.common.Stage
 import com.agb.core_ui.Animation
 import com.agb.core_ui.LemonActivity
 import com.agb.feature_home.ui.HomeFragment
 import com.agb.feature_login.ui.LoginFragment
+import com.agb.feature_profile.ui.FragmentProfile
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : LemonActivity() {
     override val router = object : Router {
         private val Stage.fragment get() = when (this) {
             Stage.Home -> HomeFragment()
             Stage.Login -> LoginFragment()
+            Stage.Profile -> FragmentProfile()
         }
 
         override fun routeTo(stage: Stage, clearBackStack: Boolean) {
@@ -60,11 +65,34 @@ class MainActivity : LemonActivity() {
         }
     }
 
-    val viewModel by lazy { ViewModelProvider(this)[MainViewModel::class.java] }
+    val viewModel: MainViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        router.routeTo(viewModel.stage)
+
+        lifecycleScope.launchWhenCreated {
+            launch {
+                viewModel.user.collect {
+                    if (it != null) {
+                        router.routeTo(Stage.Home)
+                    } else {
+                        router.routeTo(Stage.Login)
+                    }
+                }
+            }
+
+            launch {
+                viewModel.authError.collect {
+                    if (it != null) {
+                        if (viewModel.stage != Stage.Login) {
+                            router.routeTo(Stage.Login)
+                        }
+                    }
+                }
+            }
+        }
+
+        viewModel.loadUserData()
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {

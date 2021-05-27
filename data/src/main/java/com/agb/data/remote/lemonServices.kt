@@ -1,6 +1,7 @@
 package com.agb.data.remote
 
 import android.content.Context
+import com.agb.core.datasource.UserDataSource
 import com.agb.data.BuildConfig
 import com.chuckerteam.chucker.api.ChuckerCollector
 import com.chuckerteam.chucker.api.ChuckerInterceptor
@@ -41,9 +42,9 @@ inline fun <reified T> getAuthService(context: Context): T = getApi(
         .build()
 )
 
-inline fun <reified T> getApiService(context: Context, credentials: String): T = getApi(
+inline fun <reified T> getApiService(context: Context, userDataSource: UserDataSource): T = getApi(
     OkHttpClient.Builder().apply {
-        addInterceptor(BasicAuthInterceptor(credentials))
+        addInterceptor(BasicAuthInterceptor(userDataSource))
         addInterceptor(getLoggingInterceptor())
         addInterceptor(getChuckerInterceptor(context))
     }.build()

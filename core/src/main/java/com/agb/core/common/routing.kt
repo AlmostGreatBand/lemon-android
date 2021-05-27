@@ -3,6 +3,7 @@ package com.agb.core.common
 sealed class Stage {
     object Login : Stage()
     object Home : Stage()
+    object Profile : Stage()
 }
 
 interface Router {
