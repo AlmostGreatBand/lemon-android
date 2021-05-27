@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name">Lemon</string>
+    <string name="lemon_username">Username</string>
+    <string name="lemon_login">Login</string>
+    <string name="lemon_password">Password</string>
+    <string name="lemon_password_conf">Confirm password</string>
 
     <!-- Login -->
     <string name="login_title">Enter Lemon🍋</string>
@@ -12,18 +16,17 @@
 
     <!-- Registration -->
     <string name="reg_send">Send</string>
-    <string name="reg_password">Password</string>
-    <string name="reg_login">Login</string>
-    <string name="reg_username">Username</string>
     <string name="reg_sign_up">Sign up</string>
 
     <!-- Home -->
     <string name="home_title">My Cards</string>
-    <string name="home_default_name">User</string>
-    <string name="home_error">Failed to load user info: %s</string>
     <string name="home_transactions">Transactions</string>
     <string name="home_see_all">See All</string>
 
     <!-- Profile -->
     <string name="profile_title">Hi, %s!</string>
+    <string name="profile_update_btn">Update profile info</string>
+    <string name="profile_change_pass_edx">Change password</string>
+    <string name="profile_updated">Profile successfully updated!</string>
+    <string name="profile_update_error">Error while updating profile: %s</string>
 </resources>
