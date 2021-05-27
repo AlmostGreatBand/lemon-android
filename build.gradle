@@ -1,6 +1,11 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
     ext {
+        // semantic versioning
+        versionMajorApp = 0
+        versionMinorApp = 0
+        versionPatch = 3
+
         // build tools
         gradle_version = '4.1.3'
         localprops_version = "0.0.2"
@@ -39,11 +44,6 @@ buildscript {
         androidx_junit_version = "1.1.2"
         androidx_espresso_version = "3.3.0"
         androidx_arch_version = "2.1.0"
-
-        // semantic versioning
-        versionMajorApp = 0
-        versionMinorApp = 0
-        versionPatch = 2
     }
     repositories {
         google()
