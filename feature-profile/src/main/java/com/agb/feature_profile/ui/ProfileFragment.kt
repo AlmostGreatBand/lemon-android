@@ -6,7 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.lifecycleScope
+import com.agb.core.common.Operation
 import com.agb.core.common.Result
+import com.agb.core.common.Stage
+import com.agb.core.domain.model.User
 import com.agb.core_ui.LemonFragment
 import com.agb.feature_profile.R
 import com.agb.feature_profile.databinding.FragmentProfileBinding
@@ -58,72 +61,78 @@ class ProfileFragment : LemonFragment() {
             viewModel.passwordConfFlow.value = it?.toString() ?: ""
         }
 
-        updateBtn.setOnClickListener {
-            viewModel.updateUser()
+        updateBtn.setOnClickListener { viewModel.updateUser() }
+
+        logoutBtn.setOnClickListener { viewModel.logout() }
+    }
+
+    private fun configureViewModel() = with(viewModel) {
+        lifecycleScope.launchWhenCreated {
+            launch { userFlow.collect(this@ProfileFragment::userDataReceived) }
+            launch { showConfirmPass.collect(this@ProfileFragment::showConfirmPass) }
+            launch { saveButtonEnabled.collect(this@ProfileFragment::showUpdateButton) }
+            launch { updateFlow.collect(this@ProfileFragment::onUpdate) }
+            launch { logoutFlow.collect(this@ProfileFragment::onLogout) }
         }
     }
 
-    private fun configureViewModel() = with(binding) {
-        lifecycleScope.launchWhenCreated {
-            launch {
-                viewModel.userFlow.collect {
-                    when (it) {
-                        is Result.Success -> {
-                            val user = it.data
-                            usernameEdx.setText(user.name)
-                            loginEdx.setText(user.login)
-                            title.text = getString(R.string.profile_title, user.name)
-                        }
-                        is Result.Error -> {
-                            shortToast(it.exception.localizedMessage ?: "")
-                        }
-                        Result.Pending -> Unit
-                    }
-                }
+    private fun userDataReceived(result: Result<User>) {
+        when (result) {
+            is Result.Success -> {
+                val user = result.data
+                binding.usernameEdx.setText(user.name)
+                binding.loginEdx.setText(user.login)
+                binding.title.text = getString(R.string.profile_title, user.name)
             }
-
-            launch {
-                viewModel.showConfirmPass.collect {
-                    if (it) {
-                        motionPasswordConf.transitionToEnd()
-                    } else {
-                        motionPasswordConf.transitionToStart()
-                    }
-                }
+            is Result.Error -> {
+                shortToast(result.exception.localizedMessage ?: "")
             }
+            Result.Pending -> Unit
+        }
+    }
 
-            launch {
-                viewModel.saveButtonEnabled.collect {
-                    updateBtn.isEnabled = it
-                    if (it) {
-                        motionButton.transitionToEnd()
-                    } else {
-                        motionButton.transitionToStart()
-                    }
-                }
+    private fun showConfirmPass(show: Boolean) {
+        if (show) {
+            binding.motionPasswordConf.transitionToEnd()
+        } else {
+            binding.motionPasswordConf.transitionToStart()
+        }
+    }
+
+    private fun showUpdateButton(show: Boolean) {
+        binding.updateBtn.isEnabled = show
+        if (show) {
+            binding.motionButton.transitionToEnd()
+        } else {
+            binding.motionButton.transitionToStart()
+        }
+    }
+
+    private fun onUpdate(result: Operation) {
+        when (result) {
+            is Result.Success -> {
+                binding.updateBtn.isEnabled = viewModel.saveButtonEnabled.value
+                shortToast(R.string.profile_updated)
             }
+            is Result.Error -> {
+                binding.updateBtn.isEnabled = viewModel.saveButtonEnabled.value
+                shortToast(
+                    getString(
+                        R.string.profile_update_error,
+                        result.exception.message
+                    )
+                )
+            }
+            Result.Pending -> binding.updateBtn.isEnabled = false
+        }
+    }
 
-            launch {
-                viewModel.updateFlow.collect {
-                    when (it) {
-                        is Result.Success -> {
-                            updateBtn.isEnabled = viewModel.saveButtonEnabled.value
-                            shortToast(R.string.profile_updated)
-                        }
-                        is Result.Error -> {
-                            updateBtn.isEnabled = viewModel.saveButtonEnabled.value
-                            shortToast(
-                                getString(
-                                    R.string.profile_update_error,
-                                    it.exception.message
-                                )
-                            )
-                        }
-                        Result.Pending -> {
-                            updateBtn.isEnabled = false
-                        }
-                    }
-                }
+    private fun onLogout(result: Operation) {
+        when (result) {
+            is Result.Success -> router.routeTo(Stage.Login, true)
+            Result.Pending -> Unit
+            is Result.Error -> {
+                shortToast(getString(R.string.profile_logout_error, result.exception.message))
             }
         }
     }

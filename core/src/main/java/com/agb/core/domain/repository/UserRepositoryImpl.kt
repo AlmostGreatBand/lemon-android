@@ -26,6 +26,8 @@ class UserRepositoryImpl(
         return authenticator.loginUser(login, password).map { cache(it) }
     }
 
+    override suspend fun logout(): Operation = local.deleteUserInfo()
+
     private suspend fun cache(user: User) {
         local.saveUserInfo(user)
     }

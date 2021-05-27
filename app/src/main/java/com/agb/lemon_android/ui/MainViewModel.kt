@@ -14,10 +14,9 @@ import kotlinx.coroutines.launch
 class MainViewModel(
     private val interactor: UserInteractor
 ) : ViewModel() {
-    private var _stage: Stage? = null
-    val stage: Stage get() = _stage ?: Stage.Login
+    val stages = mutableListOf<Stage>()
 
-    val previousStages = mutableListOf<Stage>()
+    val stage get() = stages.last()
 
     private val _user = MutableStateFlow<User?>(null)
     val user: StateFlow<User?> get() = _user
@@ -38,15 +37,6 @@ class MainViewModel(
                 is Result.Error -> _authError.value = res.exception
                 Result.Pending -> TODO()
             }
-        }
-    }
-
-    fun setStage(new: Stage) {
-        val prev = _stage
-        _stage = new
-
-        if (prev != null) {
-            previousStages += prev
         }
     }
 }

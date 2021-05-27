@@ -27,7 +27,7 @@ class HomeFragment : LemonFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.title.setOnClickListener {
+        binding.profileBtn.setOnClickListener {
             router.routeTo(Stage.Profile)
         }
     }
