@@ -8,4 +8,5 @@ interface UserRepository {
     suspend fun getUserInfo(): Result<User>
     suspend fun saveUserInfo(user: User): Operation
     suspend fun login(login: String, password: String): Operation
+    suspend fun logout(): Operation
 }

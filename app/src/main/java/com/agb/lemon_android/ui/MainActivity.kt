@@ -22,22 +22,21 @@ class MainActivity : LemonActivity() {
         }
 
         override fun routeTo(stage: Stage, clearBackStack: Boolean) {
-            viewModel.setStage(stage)
+            if (clearBackStack) clearBackStack()
 
-            val animation = if (viewModel.previousStages.isEmpty()) {
+            val animation = if (viewModel.stages.isEmpty()) {
                 Animation.Start
             } else {
                 Animation.Forward
             }
 
-            if (clearBackStack) clearBackStack()
-
+            viewModel.stages += stage
             changeFragment(stage.fragment, animation)
         }
 
-        override fun backTo(stage: Stage) = with(viewModel.previousStages) {
-            while (removeLastOrNull() != null) {
-                if (last() == stage) {
+        override fun backTo(stage: Stage) = with(viewModel.stages) {
+            while (viewModel.stages.removeLastOrNull() != null) {
+                if (viewModel.stage == stage) {
                     changeFragment(stage.fragment, Animation.Return)
                     return@with
                 }
@@ -51,17 +50,17 @@ class MainActivity : LemonActivity() {
         }
 
         override fun back() {
-            if (viewModel.previousStages.isEmpty()) {
+            if (viewModel.stages.size < 2) {
                 finish()
                 return
             }
 
-            val stage = viewModel.previousStages.removeLast()
-            changeFragment(stage.fragment, Animation.Return)
+            viewModel.stages.removeLast()
+            changeFragment(viewModel.stage.fragment, Animation.Return)
         }
 
         override fun clearBackStack() {
-            viewModel.previousStages.clear()
+            viewModel.stages.clear()
         }
     }
 
@@ -74,9 +73,9 @@ class MainActivity : LemonActivity() {
             launch {
                 viewModel.user.collect {
                     if (it != null) {
-                        router.routeTo(Stage.Home)
+                        router.routeTo(Stage.Home, true)
                     } else {
-                        router.routeTo(Stage.Login)
+                        router.routeTo(Stage.Login, true)
                     }
                 }
             }
@@ -85,7 +84,7 @@ class MainActivity : LemonActivity() {
                 viewModel.authError.collect {
                     if (it != null) {
                         if (viewModel.stage != Stage.Login) {
-                            router.routeTo(Stage.Login)
+                            router.routeTo(Stage.Login, true)
                         }
                     }
                 }

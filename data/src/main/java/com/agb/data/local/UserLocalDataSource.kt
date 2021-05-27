@@ -1,12 +1,13 @@
 package com.agb.data.local
 
+import com.agb.core.common.Operation
 import com.agb.core.common.Result
 import com.agb.core.common.exceptions.LogicError
 import com.agb.core.common.exceptions.UnexpectedLemonException
 import com.agb.core.datasource.UserDataSource
 import com.agb.core.domain.model.User
-import java.lang.Exception
 import java.nio.charset.Charset
+import kotlin.Exception
 import okio.ByteString
 
 class UserLocalDataSource(
@@ -43,6 +44,15 @@ class UserLocalDataSource(
                 .encodeString("$login:$pass", Charset.defaultCharset())
                 .base64()
 
+            Result.Ok
+        } catch (e: Exception) {
+            Result.Error(UnexpectedLemonException(e))
+        }
+    }
+
+    override suspend fun deleteUserInfo(): Operation {
+        return try {
+            preferencesManager.clear()
             Result.Ok
         } catch (e: Exception) {
             Result.Error(UnexpectedLemonException(e))

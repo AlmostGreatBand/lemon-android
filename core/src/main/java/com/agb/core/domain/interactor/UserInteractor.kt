@@ -7,7 +7,5 @@ class UserInteractor(private val repository: UserRepository) {
     suspend fun login(login: String, password: String) = repository.login(login, password)
     suspend fun getUser() = repository.getUserInfo()
     suspend fun saveUser(user: User) = repository.saveUserInfo(user)
-    suspend fun logout() {
-        TODO("Not yet implemented")
-    }
+    suspend fun logout() = repository.logout()
 }

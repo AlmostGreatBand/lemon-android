@@ -28,6 +28,9 @@ internal class ProfileViewModel(
     private val _saveButtonEnabled = MutableStateFlow(false)
     val saveButtonEnabled: StateFlow<Boolean> get() = _saveButtonEnabled
 
+    private val _logoutFlow = MutableStateFlow<Operation>(Result.Pending)
+    val logoutFlow: StateFlow<Operation> get() = _logoutFlow
+
     val usernameFlow = MutableStateFlow("")
     val loginFlow = MutableStateFlow("")
     val passwordFlow = MutableStateFlow("")
@@ -88,6 +91,12 @@ internal class ProfileViewModel(
                 .onSuccess {
                     _userFlow.value = Result.Success(user)
                 }
+        }
+    }
+
+    fun logout() {
+        viewModelScope.launch {
+            _logoutFlow.value = userInteractor.logout()
         }
     }
 }

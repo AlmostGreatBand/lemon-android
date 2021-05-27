@@ -1,5 +1,6 @@
 package com.agb.data.remote
 
+import com.agb.core.common.Operation
 import com.agb.core.common.Result
 import com.agb.core.common.exceptions.HttpLemonException
 import com.agb.core.common.exceptions.LogicError
@@ -33,6 +34,8 @@ class UserRemoteDataSource(private val userApi: UserApi) : UserDataSource {
             }
         }
     }
+
+    override suspend fun deleteUserInfo(): Operation = error("Not allowed!")
 
     private fun handleHttpException(exception: HttpException) = when (exception.code()) {
         403 -> LogicException(LogicError.AccessDenied)
