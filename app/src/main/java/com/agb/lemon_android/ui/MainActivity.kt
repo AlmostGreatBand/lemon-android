@@ -8,7 +8,7 @@ import com.agb.core_ui.Animation
 import com.agb.core_ui.LemonActivity
 import com.agb.feature_home.ui.HomeFragment
 import com.agb.feature_login.ui.LoginFragment
-import com.agb.feature_profile.ui.FragmentProfile
+import com.agb.feature_profile.ui.ProfileFragment
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -18,7 +18,7 @@ class MainActivity : LemonActivity() {
         private val Stage.fragment get() = when (this) {
             Stage.Home -> HomeFragment()
             Stage.Login -> LoginFragment()
-            Stage.Profile -> FragmentProfile()
+            Stage.Profile -> ProfileFragment()
         }
 
         override fun routeTo(stage: Stage, clearBackStack: Boolean) {
