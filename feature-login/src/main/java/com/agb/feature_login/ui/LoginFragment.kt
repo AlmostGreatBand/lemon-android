@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.lifecycleScope
 import com.agb.core.common.Result
@@ -36,24 +35,22 @@ class LoginFragment : LemonFragment() {
 
         lifecycleScope.launchWhenStarted {
             launch {
-                viewModel.buttonEnabled.collect(binding.loginBtn::setEnabled)
+                viewModel.buttonEnabled.collect(binding.loginButton::setEnabled)
             }
             launch {
                 viewModel.loginStatus.collect {
-                    binding.progress.isVisible = false
                     when (it) {
-                        Result.Pending -> binding.progress.isVisible = true
                         is Result.Error -> shortToast(
                             getString(R.string.login_error, it.exception)
                         )
                         is Result.Success -> router.routeTo(Stage.Home, true)
-                        null -> Unit
+                        else -> Unit
                     }
                 }
             }
         }
 
-        binding.loginBtn.setOnClickListener { viewModel.login() }
+        binding.loginButton.setOnClickListener { viewModel.login() }
         binding.loginField.addTextChangedListener {
             viewModel.login.value = it?.toString() ?: ""
         }

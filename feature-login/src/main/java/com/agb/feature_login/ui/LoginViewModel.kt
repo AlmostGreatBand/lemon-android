@@ -50,6 +50,7 @@ class LoginViewModel(
         viewModelScope.launch {
             val res = userInteractor.login(login.value, password.value)
             _loginStatus.emit(res)
+            _buttonEnabled.value = true
         }
     }
 }

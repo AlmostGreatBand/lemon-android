@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/gray"
-    tools:context=".ui.login.LoginFragment"
     android:padding="16dp"
     android:gravity="center_horizontal">
 
@@ -13,7 +11,7 @@
         android:id="@+id/login_img"
         android:layout_width="247dp"
         android:layout_height="199dp"
-        android:src="@drawable/lemon"
+        android:src="@drawable/pic_lemon"
         android:layout_marginTop="150dp"/>
 
     <EditText
@@ -21,7 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/rounded_corners_text"
-        android:hint="@string/username"
+        android:hint="@string/reg_username"
         android:inputType="text"
         android:padding="10dp"
         android:layout_marginBottom="16dp"
@@ -32,7 +30,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/rounded_corners_text"
-        android:hint="@string/login"
+        android:hint="@string/reg_login"
         android:inputType="textEmailSubject"
         android:padding="10dp"
         android:layout_marginBottom="16dp"
@@ -43,7 +41,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/rounded_corners_text"
-        android:hint="@string/password"
+        android:hint="@string/reg_password"
         android:inputType="textPassword"
         android:padding="10dp"
         android:layout_marginBottom="16dp"/>
@@ -53,7 +51,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/rounded_corners_button"
-        android:text="@string/send"
+        android:text="@string/reg_send"
         android:layout_marginTop="16dp"/>
 
     <TextView
@@ -62,7 +60,7 @@
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:textColor="@android:color/white"
-        android:text="@string/sign_in"
+        android:text="@string/login_sign_in"
         android:clickable="true"
         android:focusable="true"
         android:layout_marginTop="40dp"/>
