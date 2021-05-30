@@ -13,7 +13,7 @@ import retrofit2.HttpException
 
 class AuthRemoteDataSource(
     private val api: AuthApi
-) : AuthDataSource {
+) : AuthDataSource, HttpExceptionHandler {
     override suspend fun loginUser(login: String, password: String): Result<User> {
         return try {
             val resp = api.login(Credentials.basic(login, password))
@@ -26,7 +26,7 @@ class AuthRemoteDataSource(
         }
     }
 
-    private fun handleHttpException(exception: HttpException) = when (exception.code()) {
+    override fun handleHttpException(exception: HttpException) = when (exception.code()) {
         403 -> LogicException(LogicError.AccessDenied)
         else -> HttpLemonException(exception.code(), exception.message())
     }

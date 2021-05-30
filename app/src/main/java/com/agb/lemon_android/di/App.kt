@@ -2,6 +2,7 @@ package com.agb.lemon_android.di
 
 import android.app.Application
 import com.agb.data.di.dataModule
+import com.agb.feature_cards.di.cardsModule
 import com.agb.feature_home.di.homeModule
 import com.agb.feature_login.di.loginModule
 import com.agb.feature_profile.di.profileModule
@@ -23,6 +24,7 @@ class App : Application() {
             modules(dataModule)
 
             // features
+            modules(cardsModule)
             modules(loginModule)
             modules(homeModule)
             modules(profileModule)

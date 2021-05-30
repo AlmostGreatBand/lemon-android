@@ -3,20 +3,20 @@ package com.agb.feature_home.ui
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.agb.core.common.Result
-import com.agb.core.domain.interactor.UserInteractor
-import com.agb.core.domain.model.User
+import com.agb.feature_cards.core.datasource.CardsDataSource
+import com.agb.feature_cards.core.domain.models.Card
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
-class HomeViewModel(private val userInteractor: UserInteractor) : ViewModel() {
-    private val _userFlow = MutableStateFlow<Result<User>>(Result.Pending)
-    val userFlow: StateFlow<Result<User>> get() = _userFlow
+class HomeViewModel(private val cardsDS: CardsDataSource) : ViewModel() {
+    private val _cardsFlow = MutableStateFlow<Result<List<Card>>>(Result.Pending)
+    val cardsFlow: StateFlow<Result<List<Card>>> get() = _cardsFlow
 
-    fun getName() {
+    fun getCards() {
         viewModelScope.launch {
-            val user = userInteractor.getUser()
-            _userFlow.emit(user)
+            val cards = cardsDS.getCards()
+            _cardsFlow.emit(cards)
         }
     }
 }
