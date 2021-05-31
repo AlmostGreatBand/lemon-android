@@ -49,6 +49,14 @@ class HomeFragment : LemonFragment() {
                     }
                 }
             }
+            launch {
+                viewModel.transactionsFlow.collect {
+                    when (it) {
+                        is Result.Success -> cardsAdapter?.updateDataSet(it.data)
+                        else -> Unit
+                    }
+                }
+            }
         }
 
         viewModel.getCards()

@@ -1,4 +1,4 @@
-package com.agb.feature_cards.data.remote.models
+package com.agb.feature_cards.data.models
 
 import com.agb.feature_cards.core.domain.models.Card
 

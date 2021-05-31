@@ -3,7 +3,7 @@ package com.agb.data.remote
 import com.agb.core.common.Result
 import com.agb.core.common.exceptions.HttpLemonException
 import com.agb.core.common.exceptions.LogicError
-import com.agb.core.common.exceptions.LogicException
+import com.agb.core.common.exceptions.LogicLemonException
 import com.agb.core.common.exceptions.UnexpectedLemonException
 import com.agb.core.datasource.AuthDataSource
 import com.agb.core.domain.model.User
@@ -27,7 +27,7 @@ class AuthRemoteDataSource(
     }
 
     override fun handleHttpException(exception: HttpException) = when (exception.code()) {
-        403 -> LogicException(LogicError.AccessDenied)
+        403 -> LogicLemonException(LogicError.AccessDenied)
         else -> HttpLemonException(exception.code(), exception.message())
     }
 }

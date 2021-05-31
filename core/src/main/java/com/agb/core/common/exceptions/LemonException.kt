@@ -31,6 +31,6 @@ class HttpLemonException(
     errorMessage: String = ""
 ) : LemonException("$errorCode $errorMessage")
 
-class LogicException(
+class LogicLemonException(
     val error: LogicError
 ) : LemonException("$error")
