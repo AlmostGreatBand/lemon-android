@@ -4,6 +4,7 @@ import com.agb.core.common.Operation
 import com.agb.core.common.Result
 import com.agb.core.common.exceptions.LogicError
 import com.agb.core.datasource.AuthDataSource
+import com.agb.core.datasource.RegistrationDataSource
 import com.agb.core.datasource.UserDataSource
 import com.agb.core.domain.model.User
 
@@ -11,6 +12,7 @@ class UserRepositoryImpl(
     private val local: UserDataSource,
     private val remote: UserDataSource,
     private val authenticator: AuthDataSource,
+    private val registration: RegistrationDataSource
 ) : UserRepository {
     override suspend fun getUserInfo(): Result<User> = local.getUserInfo()
 
@@ -21,6 +23,9 @@ class UserRepositoryImpl(
 
         return remote.saveUserInfo(user).onSuccess { cache(user) }
     }
+
+    override suspend fun register(user: User): Operation = registration.register(user)
+        .onSuccess { cache(user) }
 
     override suspend fun login(login: String, password: String): Operation {
         return authenticator.loginUser(login, password).map { cache(it) }

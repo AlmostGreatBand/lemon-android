@@ -9,6 +9,7 @@ import com.agb.core_ui.LemonActivity
 import com.agb.feature_home.ui.HomeFragment
 import com.agb.feature_login.ui.LoginFragment
 import com.agb.feature_profile.ui.ProfileFragment
+import com.agb.feature_registration.ui.RegistrationFragment
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -19,6 +20,7 @@ class MainActivity : LemonActivity() {
             Stage.Home -> HomeFragment()
             Stage.Login -> LoginFragment()
             Stage.Profile -> ProfileFragment()
+            Stage.Registration -> RegistrationFragment()
         }
 
         override fun routeTo(stage: Stage, clearBackStack: Boolean) {

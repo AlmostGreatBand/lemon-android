@@ -5,6 +5,7 @@ import com.agb.data.di.dataModule
 import com.agb.feature_home.di.homeModule
 import com.agb.feature_login.di.loginModule
 import com.agb.feature_profile.di.profileModule
+import com.agb.feature_registration.di.registrationModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -26,6 +27,7 @@ class App : Application() {
             modules(loginModule)
             modules(homeModule)
             modules(profileModule)
+            modules(registrationModule)
         }
     }
 }
