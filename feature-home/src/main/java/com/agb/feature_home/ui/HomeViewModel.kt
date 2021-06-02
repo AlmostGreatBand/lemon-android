@@ -15,29 +15,37 @@ class HomeViewModel(
     private val cardsDS: CardsDataSource,
     private val transactionsDS: TransactionsDataSource,
 ) : ViewModel() {
-    private val _cardsFlow = MutableStateFlow<Result<List<Card>>>(Result.Pending)
-    val cardsFlow: StateFlow<Result<List<Card>>> get() = _cardsFlow
-    private val _transactionsFlow = MutableStateFlow<Result<List<Transaction>>>(Result.Pending)
-    val transactionsFlow: StateFlow<Result<List<Transaction>>> get() = _transactionsFlow
+    private val _itemsFlow = MutableStateFlow<Result<Map<Card, List<Transaction>>>>(Result.Pending)
+    val itemsFlow: StateFlow<Result<Map<Card, List<Transaction>>>> get() = _itemsFlow
 
-    fun getCards() {
+    fun getCardsWithTransactions() {
         viewModelScope.launch {
             launch {
                 val cards = cardsDS.getCards()
-                _cardsFlow.emit(cards)
-            }
-            launch {
                 val transactions = transactionsDS.getTransactions()
-                _transactionsFlow.emit(transactions)
+
+                when {
+                    cards is Result.Success && transactions is Result.Success -> {
+                        val grouped = transactions.data.groupBy { it.cardId }
+                        val res = cards.data.map { it to (grouped[it.cardId] ?: listOf()) }.toMap()
+                        _itemsFlow.emit(Result.Success(res))
+                    }
+                    cards is Result.Error -> {
+                        _itemsFlow.emit(cards)
+                    }
+                    transactions is Result.Error -> {
+                        _itemsFlow.emit(transactions)
+                    }
+                }
             }
         }
     }
 }
 
-//private val _itemsFlow = MutableStateFlow<Result<List<Pair<Card, List<Transaction>>>>>(Result.Pending)
-//val itemsFlow: StateFlow<Result<List<Pair<Card, List<Transaction>>>>> get() = _itemsFlow
+// private val _itemsFlow = MutableStateFlow<Result<List<Pair<Card, List<Transaction>>>>>(Result.Pending)
+// val itemsFlow: StateFlow<Result<List<Pair<Card, List<Transaction>>>>> get() = _itemsFlow
 //
-//fun getCards() {
+// fun getCards() {
 //    viewModelScope.launch {
 //        val cards = cardsDS.getCards()
 //        val transactions = transactionsDS.getTransactions()
@@ -56,4 +64,4 @@ class HomeViewModel(
 //            }
 //        }
 //    }
-//}
+// }

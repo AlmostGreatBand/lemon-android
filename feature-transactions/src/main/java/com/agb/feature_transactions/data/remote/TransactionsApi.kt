@@ -1,9 +1,9 @@
 package com.agb.feature_transactions.data.remote
 
-import com.agb.feature_transactions.core.domain.models.Transaction
+import com.agb.feature_transactions.data.models.TransactionsResponse
 import retrofit2.http.GET
 
 interface TransactionsApi {
     @GET("/transactions")
-    fun getTransactions(): List<Transaction>
+    suspend fun getTransactions(): TransactionsResponse
 }

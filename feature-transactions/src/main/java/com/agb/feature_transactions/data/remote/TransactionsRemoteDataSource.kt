@@ -9,10 +9,10 @@ import retrofit2.HttpException
 
 class TransactionsRemoteDataSource(
     private val api: TransactionsApi,
-): TransactionsDataSource, HttpExceptionHandler {
+) : TransactionsDataSource, HttpExceptionHandler {
     override suspend fun getTransactions(): Result<List<Transaction>> {
         return try {
-            Result.Success(api.getTransactions())
+            Result.Success(api.getTransactions().transactions)
         } catch (e: Exception) {
             when (e) {
                 is HttpException -> Result.Error(handleHttpException(e))

@@ -10,7 +10,7 @@ import retrofit2.HttpException
 class CardsRemoteDataSource(private val api: CardsApi) : CardsDataSource, HttpExceptionHandler {
     override suspend fun getCards(): Result<List<Card>> {
         return try {
-            Result.Success(api.getCards())
+            Result.Success(api.getCards().cards)
         } catch (e: Exception) {
             when (e) {
                 is HttpException -> Result.Error(handleHttpException(e))

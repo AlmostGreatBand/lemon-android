@@ -11,6 +11,9 @@ import com.agb.core.common.Stage
 import com.agb.core_ui.LemonFragment
 import com.agb.core_ui.utils.dp
 import com.agb.feature_home.databinding.FragmentHomeBinding
+import com.agb.feature_home.ui.cards.CardsAdapter
+import com.agb.feature_home.ui.cards.CardsItemDecorator
+import com.agb.feature_home.ui.transactions.TransactionsPageAdapter
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -21,6 +24,7 @@ class HomeFragment : LemonFragment() {
 
     private val viewModel: HomeViewModel by viewModel()
     private var cardsAdapter: CardsAdapter? = null
+    private var transactionsPageAdapter: TransactionsPageAdapter? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,6 +39,7 @@ class HomeFragment : LemonFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setUpCardsAdapter()
+        setUpTransactionsPageAdapter()
 
         binding.profileBtn.setOnClickListener {
             router.routeTo(Stage.Profile)
@@ -42,27 +47,27 @@ class HomeFragment : LemonFragment() {
 
         lifecycleScope.launchWhenStarted {
             launch {
-                viewModel.cardsFlow.collect {
+                viewModel.itemsFlow.collect {
                     when (it) {
-                        is Result.Success -> cardsAdapter?.updateDataSet(it.data)
-                        else -> Unit
-                    }
-                }
-            }
-            launch {
-                viewModel.transactionsFlow.collect {
-                    when (it) {
-                        is Result.Success -> cardsAdapter?.updateDataSet(it.data)
+                        is Result.Success -> {
+                            val cards = it.data.keys.toList()
+                            cardsAdapter?.updateDataSet(cards)
+                            transactionsPageAdapter?.updateDataSet(cards, it.data)
+                        }
                         else -> Unit
                     }
                 }
             }
         }
 
-        viewModel.getCards()
+        viewModel.getCardsWithTransactions()
     }
 
     private fun setUpCardsAdapter() {
+        binding.cards.getChildAt(0).setOnTouchListener { _, event ->
+            binding.transactionPages.getChildAt(0).onTouchEvent(event)
+            false
+        }
         cardsAdapter = CardsAdapter()
         binding.cards.adapter = cardsAdapter
         binding.cards.offscreenPageLimit = 1
@@ -73,6 +78,16 @@ class HomeFragment : LemonFragment() {
 
         val itemDecoration = CardsItemDecorator()
         binding.cards.addItemDecoration(itemDecoration)
+    }
+
+    private fun setUpTransactionsPageAdapter() {
+        binding.transactionPages.getChildAt(0).setOnTouchListener { _, event ->
+            binding.cards.getChildAt(0).onTouchEvent(event)
+            false
+        }
+        transactionsPageAdapter = TransactionsPageAdapter()
+        binding.transactionPages.adapter = transactionsPageAdapter
+        binding.cards.offscreenPageLimit = 1
     }
 
     override fun onDestroyView() {

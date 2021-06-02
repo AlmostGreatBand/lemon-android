@@ -1,4 +1,4 @@
-package com.agb.feature_home.ui
+package com.agb.feature_home.ui.cards
 
 import android.graphics.Rect
 import android.view.View

@@ -1,4 +1,4 @@
-package com.agb.feature_home.ui
+package com.agb.feature_home.ui.transactions
 
 import android.graphics.Canvas
 import android.view.View

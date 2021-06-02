@@ -1,4 +1,4 @@
-package com.agb.feature_home.ui
+package com.agb.feature_home.ui.cards
 
 import androidx.recyclerview.widget.DiffUtil
 import com.agb.feature_cards.core.domain.models.Card
