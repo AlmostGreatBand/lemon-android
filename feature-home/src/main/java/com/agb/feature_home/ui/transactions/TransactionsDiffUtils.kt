@@ -4,8 +4,8 @@ import androidx.recyclerview.widget.DiffUtil
 import com.agb.feature_transactions.core.domain.models.Transaction
 
 class TransactionsDiffUtils(
-    private val old: List<Transaction>,
-    private val new: List<Transaction>,
+    private val old: List<TransactionRecyclerItem>,
+    private val new: List<TransactionRecyclerItem>,
 ) : DiffUtil.Callback() {
     override fun getOldListSize() = old.size
 

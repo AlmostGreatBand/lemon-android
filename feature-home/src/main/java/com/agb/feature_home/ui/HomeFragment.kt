@@ -13,6 +13,7 @@ import com.agb.core_ui.utils.dp
 import com.agb.feature_home.databinding.FragmentHomeBinding
 import com.agb.feature_home.ui.cards.CardsAdapter
 import com.agb.feature_home.ui.cards.CardsItemDecorator
+import com.agb.feature_home.ui.transactions.StickyHeaderTransactionsDecorator
 import com.agb.feature_home.ui.transactions.TransactionsPageAdapter
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -51,10 +52,12 @@ class HomeFragment : LemonFragment() {
                     when (it) {
                         is Result.Success -> {
                             val cards = it.data.keys.toList()
-                            cardsAdapter?.updateDataSet(cards)
-                            transactionsPageAdapter?.updateDataSet(cards, it.data)
+                            cardsAdapter?.updateDataSet(cards + cards[0] + cards[1])
+                            transactionsPageAdapter?.updateDataSet(cards + cards[0] + cards[1], it.data)
                         }
-                        else -> Unit
+                        else -> {
+
+                        }
                     }
                 }
             }
@@ -64,30 +67,27 @@ class HomeFragment : LemonFragment() {
     }
 
     private fun setUpCardsAdapter() {
-        binding.cards.getChildAt(0).setOnTouchListener { _, event ->
-            binding.transactionPages.getChildAt(0).onTouchEvent(event)
-            false
-        }
         cardsAdapter = CardsAdapter()
         binding.cards.adapter = cardsAdapter
         binding.cards.offscreenPageLimit = 1
         val pageTransformer = ViewPager2.PageTransformer { page: View, position: Float ->
-            page.translationX = (-60).dp * position
+            // todo get rid of magic number
+            page.translationX = (-90).dp * position
         }
         binding.cards.setPageTransformer(pageTransformer)
-
-        val itemDecoration = CardsItemDecorator()
-        binding.cards.addItemDecoration(itemDecoration)
+        binding.cards.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                binding.transactionPages.setCurrentItem(position, true)
+            }
+        })
     }
 
-    private fun setUpTransactionsPageAdapter() {
-        binding.transactionPages.getChildAt(0).setOnTouchListener { _, event ->
-            binding.cards.getChildAt(0).onTouchEvent(event)
-            false
-        }
+    private fun setUpTransactionsPageAdapter() = with(binding.transactionPages) {
         transactionsPageAdapter = TransactionsPageAdapter()
-        binding.transactionPages.adapter = transactionsPageAdapter
-        binding.cards.offscreenPageLimit = 1
+        isUserInputEnabled = false
+        adapter = transactionsPageAdapter
+        offscreenPageLimit = 1
     }
 
     override fun onDestroyView() {

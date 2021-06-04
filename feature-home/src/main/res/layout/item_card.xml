@@ -5,37 +5,37 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginHorizontal="24dp"
+    tools:layout_height="wrap_content"
+    android:layout_marginHorizontal="60dp"
     android:background="@drawable/card_background"
-    android:paddingHorizontal="20dp">
+    android:padding="20dp">
 
     <TextView
-        android:id="@+id/text_balance"
+        android:id="@+id/balance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:text="$ 23 0012.03"
         android:fontFamily="@font/roboto"
         android:textSize="18sp"
         android:textColor="@color/green_kelp"
-        android:layout_marginTop="22dp"
         android:textStyle="bold"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
 
     <TextView
-        android:id="@+id/text_bank"
+        android:id="@+id/bank"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="Privat Bank"
         android:fontFamily="@font/roboto"
-        android:textSize="18sp"
         android:textColor="@color/green_kelp"
-        android:layout_marginBottom="49dp"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/balance"
+        tools:text="Privat Bank" />
 
     <TextView
-        android:id="@+id/text_numbers"
+        android:id="@+id/pan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto"
@@ -44,7 +44,7 @@
         android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_bank"
+        app:layout_constraintTop_toBottomOf="@id/bank"
         tools:text="**** 3829" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
