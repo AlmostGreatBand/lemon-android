@@ -1,6 +1,7 @@
 package com.agb.core.common
 
 sealed class Stage {
+    object Registration : Stage()
     object Login : Stage()
     object Home : Stage()
     object Profile : Stage()

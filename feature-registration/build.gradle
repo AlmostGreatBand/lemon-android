@@ -1,12 +1,6 @@
-apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
-
-def genVersionCode() {
-    return project.versionMajorApp * 100000 + project.versionMinorApp * 1000 + project.versionPatch.toInteger()
-}
-
-def genVersionName() {
-    return "${project.versionMajorApp}.${project.versionMinorApp}.${project.versionPatch}"
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
 }
 
 android {
@@ -14,17 +8,13 @@ android {
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        applicationId "com.agb.lemon_android"
         minSdkVersion 23
         targetSdkVersion 30
-        versionCode genVersionCode()
-        versionName genVersionName()
+        versionCode 1
+        versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-    }
-
-    kotlinOptions {
-        jvmTarget = '1.8'
+        consumerProguardFiles "consumer-rules.pro"
     }
 
     buildTypes {
@@ -33,38 +23,29 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-
     compileOptions {
-        sourceCompatibility 1.8
-        targetCompatibility 1.8
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
-
-    copy {
-        from "../.github/hooks"
-        into "../.git/hooks"
-        fileMode 0777
-    }
-
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_1_8.toString()
+        jvmTarget = '1.8'
     }
-
+    buildFeatures {
+        viewBinding true
+    }
 }
 
 dependencies {
-    implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
 
     implementation "androidx.core:core-ktx:$androidx_core_version"
     implementation "androidx.appcompat:appcompat:$androidx_app_compat_version"
     implementation "androidx.constraintlayout:constraintlayout:$androidx_constraint_layout_version"
-    implementation "androidx.legacy:legacy-support-v4:$androidx_legacy_version"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$androidx_lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:$androidx_lifecycle_version"
-    implementation "androidx.recyclerview:recyclerview:$androidx_recycler_version"
-
     implementation "com.google.android.material:material:$material_version"
 
     implementation "io.insert-koin:koin-core:$koin_version"
@@ -73,17 +54,11 @@ dependencies {
     implementation project(path: ':data')
     implementation project(path: ':core')
     implementation project(path: ':core-ui')
-    implementation project(path: ':feature-login')
-    implementation project(path: ':feature-home')
-    implementation project(path: ':feature-profile')
-    implementation project(path: ':feature-registration')
-    implementation project(path: ':feature-cards')
-    implementation project(path: ':feature-transactions')
 
     testImplementation "junit:junit:$junit_version"
     testImplementation "org.mockito:mockito-core:$mockito_version"
     testImplementation "org.mockito:mockito-inline:$mockito_inline_version"
-    testImplementation "androidx.arch.core:core-testing:$androidx_arch_version"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines_version"
     androidTestImplementation "androidx.test.ext:junit:$androidx_junit_version"
     androidTestImplementation "androidx.test.espresso:espresso-core:$androidx_espresso_version"
 }

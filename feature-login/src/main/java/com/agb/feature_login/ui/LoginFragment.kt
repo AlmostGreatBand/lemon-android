@@ -57,6 +57,10 @@ class LoginFragment : LemonFragment() {
         binding.passField.addTextChangedListener {
             viewModel.password.value = it?.toString() ?: ""
         }
+
+        binding.loginToRegistration.setOnClickListener {
+            router.routeTo(Stage.Registration)
+        }
     }
 
     override fun onDestroyView() {

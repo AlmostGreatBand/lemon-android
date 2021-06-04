@@ -8,4 +8,5 @@ class UserInteractor(private val repository: UserRepository) {
     suspend fun getUser() = repository.getUserInfo()
     suspend fun saveUser(user: User) = repository.saveUserInfo(user)
     suspend fun logout() = repository.logout()
+    suspend fun register(user: User) = repository.register(user)
 }

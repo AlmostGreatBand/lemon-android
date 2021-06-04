@@ -3,6 +3,7 @@ package com.agb.core
 import com.agb.core.common.Result
 import com.agb.core.common.exceptions.UnexpectedLemonException
 import com.agb.core.datasource.AuthDataSource
+import com.agb.core.datasource.RegistrationDataSource
 import com.agb.core.datasource.UserDataSource
 import com.agb.core.domain.model.User
 import com.agb.core.domain.repository.UserRepositoryImpl
@@ -17,8 +18,9 @@ class UserRepositoryImplTest {
     private val local by lazy { Mockito.mock(UserDataSource::class.java) }
     private val remote by lazy { Mockito.mock(UserDataSource::class.java) }
     private val auth by lazy { Mockito.mock(AuthDataSource::class.java) }
+    private val reg by lazy { Mockito.mock(RegistrationDataSource::class.java) }
 
-    private val repo by lazy { UserRepositoryImpl(local, remote, auth) }
+    private val repo by lazy { UserRepositoryImpl(local, remote, auth, reg) }
     private val user by lazy { User("test", "test", "pass") }
 
     private inline fun <reified T> any(): T = Mockito.any(T::class.java)
