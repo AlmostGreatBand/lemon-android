@@ -2,7 +2,7 @@ package com.agb.core.common
 
 import com.agb.core.common.exceptions.LemonException
 import com.agb.core.common.exceptions.LogicError
-import com.agb.core.common.exceptions.LogicException
+import com.agb.core.common.exceptions.LogicLemonException
 import com.agb.core.common.exceptions.UnexpectedLemonException
 
 sealed class Result<out R> {
@@ -21,9 +21,9 @@ sealed class Result<out R> {
          * @param message message of [UnexpectedLemonException] */
         constructor(message: String) : this(UnexpectedLemonException(message))
 
-        /** Produces [Error] with [LogicException]
-         * @param logicError error of [LogicException] */
-        constructor(logicError: LogicError) : this(LogicException(logicError))
+        /** Produces [Error] with [LogicLemonException]
+         * @param logicError error of [LogicLemonException] */
+        constructor(logicError: LogicError) : this(LogicLemonException(logicError))
     }
 
     /** If this [Result] is [Error], unwraps error and passes is as parameter to [cb].
