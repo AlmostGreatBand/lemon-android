@@ -92,3 +92,11 @@ sealed class Result<out R> {
 /** Typealias for stateless operation, for example saving or updating data, where no
  * value is returned */
 typealias Operation = Result<Unit>
+
+inline fun <T> Result<T>.orElse(transform: (LemonException) -> Result<T>): Result<T> {
+    return when (this) {
+        Result.Pending -> Result.Pending
+        is Result.Error -> transform(this.exception)
+        is Result.Success -> this
+    }
+}

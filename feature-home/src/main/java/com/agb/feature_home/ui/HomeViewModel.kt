@@ -21,7 +21,7 @@ class HomeViewModel(
     fun getCardsWithTransactions() {
         viewModelScope.launch {
             launch {
-                val cards = cardsDS.getCards()
+                val cards = cardsDS.getCards("")
                 val transactions = transactionsDS.getTransactions()
 
                 when {

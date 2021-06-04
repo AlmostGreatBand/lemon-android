@@ -45,6 +45,8 @@ class TransactionsPageAdapter :
             recyclerView.layoutManager = LinearLayoutManager(itemView.context)
             recyclerView.addItemDecoration(StickyHeaderTransactionsDecorator(adapter))
 
+            // TODO may occur out of bound exception when return 0 transactions,
+            //  but for debug I need to duplicate them
             adapter.updateDataSet(
                 List(10) {
                     if ((0..1).random() == 0) transactions[0]
