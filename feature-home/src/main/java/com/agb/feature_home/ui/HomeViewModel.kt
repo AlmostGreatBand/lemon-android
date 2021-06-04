@@ -41,27 +41,3 @@ class HomeViewModel(
         }
     }
 }
-
-// private val _itemsFlow = MutableStateFlow<Result<List<Pair<Card, List<Transaction>>>>>(Result.Pending)
-// val itemsFlow: StateFlow<Result<List<Pair<Card, List<Transaction>>>>> get() = _itemsFlow
-//
-// fun getCards() {
-//    viewModelScope.launch {
-//        val cards = cardsDS.getCards()
-//        val transactions = transactionsDS.getTransactions()
-//
-//        when {
-//            cards is Result.Success && transactions is Result.Success -> {
-//                val grouped = transactions.data.groupBy { it.cardId }
-//                val res = cards.data.map { it to (grouped[it.cardId] ?: emptyList()) }
-//                _itemsFlow.emit(Result.Success(res))
-//            }
-//            cards is Result.Error -> {
-//                _itemsFlow.emit(cards)
-//            }
-//            transactions is Result.Error -> {
-//                _itemsFlow.emit(transactions)
-//            }
-//        }
-//    }
-// }

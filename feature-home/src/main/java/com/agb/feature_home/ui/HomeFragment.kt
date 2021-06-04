@@ -12,8 +12,6 @@ import com.agb.core_ui.LemonFragment
 import com.agb.core_ui.utils.dp
 import com.agb.feature_home.databinding.FragmentHomeBinding
 import com.agb.feature_home.ui.cards.CardsAdapter
-import com.agb.feature_home.ui.cards.CardsItemDecorator
-import com.agb.feature_home.ui.transactions.StickyHeaderTransactionsDecorator
 import com.agb.feature_home.ui.transactions.TransactionsPageAdapter
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -53,10 +51,12 @@ class HomeFragment : LemonFragment() {
                         is Result.Success -> {
                             val cards = it.data.keys.toList()
                             cardsAdapter?.updateDataSet(cards + cards[0] + cards[1])
-                            transactionsPageAdapter?.updateDataSet(cards + cards[0] + cards[1], it.data)
+                            transactionsPageAdapter?.updateDataSet(
+                                cards + cards[0] + cards[1],
+                                it.data
+                            )
                         }
                         else -> {
-
                         }
                     }
                 }
@@ -75,12 +75,14 @@ class HomeFragment : LemonFragment() {
             page.translationX = (-90).dp * position
         }
         binding.cards.setPageTransformer(pageTransformer)
-        binding.cards.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-            override fun onPageSelected(position: Int) {
-                super.onPageSelected(position)
-                binding.transactionPages.setCurrentItem(position, true)
+        binding.cards.registerOnPageChangeCallback(
+            object : ViewPager2.OnPageChangeCallback() {
+                override fun onPageSelected(position: Int) {
+                    super.onPageSelected(position)
+                    binding.transactionPages.setCurrentItem(position, true)
+                }
             }
-        })
+        )
     }
 
     private fun setUpTransactionsPageAdapter() = with(binding.transactionPages) {

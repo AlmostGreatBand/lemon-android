@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.core.view.children
 import androidx.recyclerview.widget.RecyclerView
 
-class StickyHeaderTransactionsDecorator (
+class StickyHeaderTransactionsDecorator(
     private val adapter: StickyHeaderAdapter
 ) : RecyclerView.ItemDecoration() {
     private var headerHeight = 0

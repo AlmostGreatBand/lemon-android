@@ -48,7 +48,7 @@ class TransactionsAdapter :
         private val type = item.findViewById<TextView>(R.id.type)
         private val sum = item.findViewById<TextView>(R.id.sum)
 
-        fun bind(transaction: TransactionRecyclerItem) = when(transaction.type) {
+        fun bind(transaction: TransactionRecyclerItem) = when (transaction.type) {
             TransactionRecyclerItem.Type.Date -> bindHeader(transaction)
             TransactionRecyclerItem.Type.Transaction -> bindTransaction(transaction)
         }
@@ -93,4 +93,3 @@ class TransactionsAdapter :
         return transactions.getOrNull(pos)?.type == TransactionRecyclerItem.Type.Date
     }
 }
-

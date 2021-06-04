@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.agb.feature_cards.core.domain.models.Card
 import com.agb.feature_home.R
 import com.agb.feature_transactions.core.domain.models.Transaction
-import java.util.*
+import java.util.Date
 
 class TransactionsPageAdapter :
     RecyclerView.Adapter<TransactionsPageAdapter.TransactionsPageViewHolder>() {
@@ -45,7 +45,12 @@ class TransactionsPageAdapter :
             recyclerView.layoutManager = LinearLayoutManager(itemView.context)
             recyclerView.addItemDecoration(StickyHeaderTransactionsDecorator(adapter))
 
-            adapter.updateDataSet(List(10) { if ((0..1).random() == 0) transactions[0] else transactions[0].copy(date = Date(121, 5, 3)) }.toTransactionRecyclerItems())
+            adapter.updateDataSet(
+                List(10) {
+                    if ((0..1).random() == 0) transactions[0]
+                    else transactions[0].copy(date = Date(121, 5, 3))
+                }.toTransactionRecyclerItems()
+            )
         }
     }
 }

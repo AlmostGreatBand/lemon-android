@@ -4,7 +4,7 @@ buildscript {
         // semantic versioning
         versionMajorApp = 0
         versionMinorApp = 0
-        versionPatch = 3
+        versionPatch = 4
 
         // build tools
         gradle_version = '4.1.3'

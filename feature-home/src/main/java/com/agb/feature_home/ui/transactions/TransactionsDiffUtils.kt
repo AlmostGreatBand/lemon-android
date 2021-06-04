@@ -1,7 +1,6 @@
 package com.agb.feature_home.ui.transactions
 
 import androidx.recyclerview.widget.DiffUtil
-import com.agb.feature_transactions.core.domain.models.Transaction
 
 class TransactionsDiffUtils(
     private val old: List<TransactionRecyclerItem>,
