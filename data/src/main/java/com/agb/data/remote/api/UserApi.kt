@@ -6,9 +6,9 @@ import retrofit2.http.GET
 import retrofit2.http.POST
 
 interface UserApi {
-    @GET("/profile/")
+    @GET("/profile")
     suspend fun profile(): User
 
-    @POST("/profile/")
+    @POST("/profile")
     suspend fun updateProfile(@Body user: User)
 }

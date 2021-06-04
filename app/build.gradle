@@ -77,6 +77,8 @@ dependencies {
     implementation project(path: ':feature-home')
     implementation project(path: ':feature-profile')
     implementation project(path: ':feature-registration')
+    implementation project(path: ':feature-cards')
+    implementation project(path: ':feature-transactions')
 
     testImplementation "junit:junit:$junit_version"
     testImplementation "org.mockito:mockito-core:$mockito_version"

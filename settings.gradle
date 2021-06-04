@@ -1,3 +1,5 @@
+include ':feature-transactions'
+include ':feature-cards'
 include ':core'
 include ':app'
 include ':feature-login'

@@ -6,6 +6,6 @@ import retrofit2.http.Header
 
 interface AuthApi {
 
-    @GET("/profile/")
+    @GET("/profile")
     suspend fun login(@Header("Authorization") credentials: String): User
 }

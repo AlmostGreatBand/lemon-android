@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="white">#FFFFFF</color>
     <color name="loafer">#ECF6E5</color>
     <color name="green_kelp">#25311E</color>
     <color name="green_kelp2">#254023</color>
     <color name="feijoa">#A4D280</color>
     <color name="gray">#232323</color>
     <color name="goblin">#408036</color>
+    <color name="cinnabar">#E85629</color>
 </resources>
