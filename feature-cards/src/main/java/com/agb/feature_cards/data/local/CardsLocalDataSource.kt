@@ -13,8 +13,8 @@ import com.agb.feature_cards.data.local.db.toCardsEntity
 class CardsLocalDataSource(private val cardsDao: CardsDao) : CardsDataSource {
     private val tag = this::class.java.simpleName
 
-    override suspend fun getCards(login: String): Result<List<Card>> = try {
-        val cardsList = cardsDao.getCards()
+    override suspend fun getCards(login: String) = try {
+        val cardsList = cardsDao.getCards(login)
         if (cardsList.isNotEmpty()) {
             val mapped = cardsList.map(CardsEntity::toCards)
             Result.Success(mapped)
