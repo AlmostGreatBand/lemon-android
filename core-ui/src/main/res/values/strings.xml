@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">Lemon</string>
+    <string name="lemon_username">Username</string>
+    <string name="lemon_login">Login</string>
+    <string name="lemon_password">Password</string>
+    <string name="lemon_password_conf">Confirm password</string>
+
+    <!-- Login -->
+    <string name="login_title">Enter Lemon🍋</string>
+    <string name="login_login_edx">Login</string>
+    <string name="login_password_edx">Password</string>
+    <string name="login_login_btn">Login</string>
+    <string name="login_error">Unable to login due error: %s</string>
+    <string name="login_register">Register</string>
+    <string name="login_forgot_password">Forgot your password?</string>
+
+    <!-- Registration -->
+    <string name="reg_send">Send</string>
+    <string name="reg_log_in">Log in</string>
+
+    <!-- Home -->
+    <string name="home_title">My Cards</string>
+    <string name="home_transactions">Transactions</string>
+    <string name="home_see_all">See All</string>
+
+    <!-- Profile -->
+    <string name="profile_title">Hi, %s!</string>
+    <string name="profile_update_btn">Update profile info</string>
+    <string name="profile_change_pass_edx">Change password</string>
+    <string name="profile_updated">Profile successfully updated!</string>
+    <string name="profile_update_error">Error while updating profile: %s</string>
+    <string name="profile_logout_error">Unable to logout: %s</string>
+</resources>

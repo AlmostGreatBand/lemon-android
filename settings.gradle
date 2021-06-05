@@ -1,3 +1,11 @@
+include ':feature-transactions'
+include ':feature-cards'
 include ':core'
 include ':app'
+include ':feature-login'
+include ':data'
+include ':core-ui'
+include ':feature-home'
 rootProject.name = "lemon-android"
+include ':feature-profile'
+include ':feature-registration'

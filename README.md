@@ -1,5 +1,14 @@
-# lemon-android
+![build](https://github.com/AlmostGreatBand/lemon-android/actions/workflows/android.yml/badge.svg)
+# Lemon🍋 Android
 
-The actual code is on the `dev` branch, waiting for transaction-cache feature and will be merged here in the near future        
+Android client for Lemon App.
 
-android-client🍋
+| VERSIONS                        |
+| ------------------------------- |
+| __[Changelog](CHANGELOG.md)__   |
+| __[Release plan](RELEASES.md)__ | 
+
+# Team:
+- [Zhenya Zasko](https://github.com/NeProgramist)
+- [Oleh Kovalyshyn](https://github.com/ALEGATOR1209)
+- [Victoria Romanova](https://github.com/V1ckeyR)
