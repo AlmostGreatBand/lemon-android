@@ -7,8 +7,8 @@ import androidx.room.Query
 
 @Dao
 interface CardsDao {
-    @Query("select * from cards where user")
-    fun getCards(): List<CardsEntity>
+    @Query("select * from cards where user = :login")
+    fun getCards(login: String): List<CardsEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(cards: List<CardsEntity>)

@@ -10,7 +10,7 @@ import retrofit2.HttpException
 class TransactionsRemoteDataSource(
     private val api: TransactionsApi,
 ) : TransactionsDataSource, HttpExceptionHandler {
-    override suspend fun getTransactions(): Result<List<Transaction>> {
+    override suspend fun getTransactions(login: String): Result<List<Transaction>> {
         return try {
             Result.Success(api.getTransactions().transactions)
         } catch (e: Exception) {
@@ -20,4 +20,9 @@ class TransactionsRemoteDataSource(
             }
         }
     }
+
+    override suspend fun saveTransactions(
+        login: String,
+        transactions: List<Transaction>,
+    ) = Result.Error("Stub!")
 }
